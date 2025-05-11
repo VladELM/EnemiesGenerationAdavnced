@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    private Vector3 _direction;
+    private Transform _target;
     
     private bool _isAllowMove;
 
@@ -17,15 +17,16 @@ public class Enemy : MonoBehaviour
     {
         if (_isAllowMove)
         {
-            transform.LookAt(_direction);
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+            transform.LookAt(_target.position);
+            transform.position = Vector3.MoveTowards(transform.position, _target.position,
+                                                    _speed * Time.deltaTime);
         }
     }
 
-    public void Initialize(Vector3 startPosition, Vector3 direction)
+    public void Initialize(Vector3 startPosition, Transform target)
     {
         transform.position = new Vector3(startPosition.x, transform.position.y, startPosition.z);
-        _direction = direction;
+        _target = target;
         _isAllowMove = true;
     }
 }
