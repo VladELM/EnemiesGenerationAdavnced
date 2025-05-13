@@ -5,7 +5,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Transform _target;
-    
     private bool _isAllowMove;
 
     private void Awake()
